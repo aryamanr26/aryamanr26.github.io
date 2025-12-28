@@ -1,15 +1,15 @@
 {
   "basics": {
-    "name": "Aryaman R",
-    "label": "Robotics & Autonomous Systems Engineer",
+    "name": "Aryaman Rao",
+    "label": "Graduate Student | Robotics Engineer",
     "image": "",
     "email": "aryamanr@umich.edu",
     "phone": "",
-    "url": "https://your-portfolio-url.com",
+    "url": "https://aryamanr26.github.io/",
     "summary": "Robotics engineer focused on autonomous driving, motion planning, and efficiency-aware machine learning systems. Experienced across the full autonomy stack, from perception and sensor fusion to planning, control, and large-scale simulation.",
     "location": {
-      "address": "",
-      "postalCode": "",
+      "address": "2253 Stone Rd",
+      "postalCode": "48105",
       "city": "Ann Arbor",
       "countryCode": "US",
       "region": "Michigan"
