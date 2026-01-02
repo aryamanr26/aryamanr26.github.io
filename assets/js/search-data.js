@@ -440,15 +440,15 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-starting-my-graduate-degree-at-university-of-michigan",
-          title: 'Starting my graduate degree at University of Michigan!.',
-          description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
+            },},{id: "news-a-long-announcement-with-details",
           title: 'A long announcement with details',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_2/";
-            },},{id: "news-spring-commencement-emoji-sparkles",
+            },},{id: "news-starting-my-graduate-degree-at-university-of-michigan",
+          title: 'Starting my graduate degree at University of Michigan!.',
+          description: "",
+          section: "News",},{id: "news-spring-commencement-emoji-sparkles",
           title: 'Spring Commencement! emoji! :sparkles:',
           description: "",
           section: "News",},{id: "projects-project-1",
@@ -501,21 +501,14 @@ ninja.data = [{
         title: 'CV',
         section: 'Socials',
         handler: () => {
-          window.open("/assets/pdf/example_pdf.pdf", "_blank");
+          window.open("/assets/pdf/resume.pdf", "_blank");
         },
       },{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%79%6F%75@%65%78%61%6D%70%6C%65.%63%6F%6D", "_blank");
-        },
-      },{
-        id: 'social-inspire',
-        title: 'Inspire HEP',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://inspirehep.net/authors/1010907", "_blank");
+          window.open("mailto:%61%72%79%61%6D%61%6E%72@%75%6D%69%63%68.%65%64%75", "_blank");
         },
       },{
         id: 'social-linkedin',
@@ -525,18 +518,18 @@ ninja.data = [{
           window.open("https://www.linkedin.com/in/aryamanrao26", "_blank");
         },
       },{
-        id: 'social-rss',
-        title: 'RSS Feed',
+        id: 'social-orcid',
+        title: 'ORCID',
         section: 'Socials',
         handler: () => {
-          window.open("/feed.xml", "_blank");
+          window.open("https://orcid.org/0000-0002-1515-8009", "_blank");
         },
       },{
         id: 'social-scholar',
         title: 'Google Scholar',
         section: 'Socials',
         handler: () => {
-          window.open("https://scholar.google.com/citations?user=qc6CJjYAAAAJ", "_blank");
+          window.open("https://scholar.google.com/citations?user=Uy2KwikAAAAJ", "_blank");
         },
       },{
         id: 'social-custom_social',
