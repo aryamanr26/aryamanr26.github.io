@@ -449,9 +449,9 @@ ninja.data = [{
           section: "News",},{id: "news-spring-commencement-emoji-sparkles",
           title: 'Spring Commencement! emoji! :sparkles:',
           description: "",
-          section: "News",},{id: "projects-efficient-vision-language-action-models-for-autonomous-driving",
-          title: 'Efficient Vision-Language-Action Models for Autonomous Driving',
-          description: "Token Merging for efficient VLA models in self-driving cars",
+          section: "News",},{id: "projects-efficient-vla-models-for-self-driving",
+          title: 'Efficient VLA Models for Self-Driving',
+          description: "Token Merging techniques for reducing computational costs in Vision-Language-Action models for self-driving cars while maintaining safety performance and inference efficiency",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-project-2",
