@@ -454,9 +454,9 @@ ninja.data = [{
           description: "Token Merging techniques for reducing computational costs in Vision-Language-Action models for self-driving cars while maintaining safety performance and inference efficiency",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
+            },},{id: "projects-motion-planning-performance-analysis",
+          title: 'Motion Planning Performance Analysis',
+          description: "Empirical evaluation of sampling-based motion planners including RRT-connect, RRT*, Informed RRT*, BiRRT*, and PRM* in obstacle-dense environments on a 6-DOF robotic arm",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
             },},{id: "projects-project-3-with-very-long-name",
