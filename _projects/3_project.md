@@ -1,81 +1,100 @@
 ---
 layout: page
-title: project 3 with very long name
-description: a project that redirects to another website
-img: assets/img/7.jpg
-redirect: https://unsplash.com
-importance: 3
+title: SuPerMVO: Learning-Augmented Monocular Visual Odometry
+description: A hybrid monocular visual odometry pipeline combining SuperPoint, SuperGlue, and GTSAM to reduce drift and improve robustness in low-texture driving environments
+img: assets/img/superglue.png
+importance: 2
 category: work
+giscus_comments: false
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Motivation
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+Monocular visual odometry is attractive due to its low cost and wide availability, but classical pipelines such as ORB-SLAM struggle in texture-sparse and dynamic environments. These failures lead to unstable tracking, poor feature correspondences, and severe scale drift, particularly in forward-motion driving scenarios.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+Recent advances in deep learning-based feature extraction provide a robust alternative. Learned keypoints leverage global image context and semantic cues, enabling reliable correspondence even where gradient-based methods fail. This project explores how such learned representations can be integrated with classical geometric optimization to improve monocular visual odometry.
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
+## Approach
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+SuPerMVO is a purely monocular visual odometry pipeline that fuses deep feature matching with graph-based pose optimization.
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
+### Pipeline Overview
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+- **Feature Detection**  
+  SuperPoint jointly detects interest points and computes descriptors in a single forward pass, enabling robust keypoints even in low-texture regions.
 
-{% raw %}
+- **Feature Matching**  
+  SuperGlue performs context-aware matching using transformer-based attention, producing high-confidence correspondences under viewpoint changes and repetitive patterns.
 
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
+- **Relative Pose Estimation**  
+  Matched features are used to estimate the Essential matrix via RANSAC, recovering full 6-DoF relative pose between frames.
 
-{% endraw %}
+- **Keyframe Selection**  
+  Frames are promoted to keyframes when translational displacement exceeds 0.01 m, reducing redundancy and drift accumulation.
+
+- **Pose Graph Optimization**  
+  A factor graph is constructed in GTSAM using odometry constraints and priors, and optimized via Levenberg–Marquardt.
+
+- **Scale Alignment**  
+  Final trajectories are aligned to ground truth using evo's Umeyama-based similarity alignment, enabling metric evaluation despite monocular scale ambiguity.
+
+## Dataset and Evaluation
+
+The system is evaluated on the KITTI odometry benchmark using only monocular RGB images. Camera intrinsics are fixed across sequences, and ground-truth poses are parsed from KITTI pose files.
+
+Evaluation metrics include:
+- Absolute Pose Mean Error (APME)
+- Absolute RMSE
+- Relative Pose Mean Error (RPME)
+- Relative RMSE
+
+Both raw and scale-aligned trajectories are evaluated to analyze drift behavior.
+
+## Results
+
+### Qualitative Results
+
+SuPerMVO produces trajectories that closely follow KITTI ground truth across multiple sequences. Compared to ORB-based pipelines, SuPerMVO:
+- Maintains global trajectory shape
+- Exhibits significantly lower drift
+- Performs robustly in low-texture and dynamic scenes
+
+Orientation estimates show strong pitch and yaw tracking, with expected limitations in roll due to monocular constraints.
+
+### Quantitative Results
+
+Across KITTI sequences 00, 06, 09, and 10:
+- SuPerMVO consistently outperforms ORB-based baselines
+- Scale-aligned SuPerMVO achieves the lowest errors in both global and local metrics
+- Performance gains are most pronounced in texture-poor environments
+
+These results demonstrate that learned feature representations, when combined with classical optimization, significantly improve monocular VO robustness.
+
+## Limitations
+
+- **Loop Closure**  
+  A Bag-of-Words loop closure module was explored but proved unreliable due to repetitive environments and limited visual distinctiveness.
+
+- **Bundle Adjustment**  
+  Sliding-window bundle adjustment underperformed due to sparse correspondences and planar road geometry.
+
+Both components remain supported by the framework but were excluded from final evaluation.
+
+## Key Contributions
+
+- Hybrid deep-learning and geometric monocular VO pipeline  
+- Robust feature matching in low-texture driving scenes  
+- Significant reduction in scale drift and trajectory deformation  
+- Clean integration of SuperPoint, SuperGlue, GTSAM, and evo  
+
+## Future Work
+
+- Transformer-based semantic loop closure  
+- IMU or stereo fusion for absolute scale recovery  
+- Real-time embedded deployment  
+- Extension to a full SLAM system with global mapping  
+
+## Resources
+
+- **Code**: https://github.com/aryamanr26/NA568-Project-Group22  
+- **Video Demo**: https://www.youtube.com/watch?v=dF_nQ6IA1po
