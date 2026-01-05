@@ -7,11 +7,8 @@ importance: 2
 category: work
 giscus_comments: false
 ---
-## Efficient Vision-Language-Action Models for Autonomous Driving
 
-This project focuses on optimizing Vision-Language-Action (VLA) models for autonomous driving by integrating training-free Token Merging (ToMe) techniques to achieve significant efficiency gains without sacrificing performance.
-
-### Motivation
+## Motivation
 
 Current Vision-Language-Action models for autonomous driving rely on large vision encoders that impose heavy computational and memory costs, often exceeding 100 GFLOPs per inference. These requirements limit deployment on vehicle-mounted edge hardware where compute budgets remain below 10 TOPS and response times must be under 100 ms. Attention mechanisms scale quadratically, creating further inefficiencies for high-resolution video inputs.
 
