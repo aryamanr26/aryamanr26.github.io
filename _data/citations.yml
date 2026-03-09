@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-03-02'
+  last_updated: '2026-03-09'
 papers:
   Uy2KwikAAAAJ:2osOgNQ5qMEC:
     citations: 5
@@ -10,7 +10,7 @@ papers:
     title: Optimization of Inverted Double-Element Airfoil in Ground Effect using Improved HHO and Kriging Surrogate Model
     year: '2023'
   Uy2KwikAAAAJ:IjCSPb-OGe4C:
-    citations: 7
+    citations: 8
     title: A novel framework for optimizing Gurney flaps using RBF surrogate model and cuckoo search algorithm
     year: '2024'
   Uy2KwikAAAAJ:UeHWp8X0CEIC:
