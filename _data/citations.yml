@@ -1,12 +1,12 @@
 metadata:
-  last_updated: '2026-08-31'
+  last_updated: '2026-09-07'
 papers:
   Uy2KwikAAAAJ:2osOgNQ5qMEC:
     citations: 5
     title: A Novel Framework for Optimizing Gurney Flaps using RBF Neural Network and Cuckoo Search Algorithm
     year: '2023'
   Uy2KwikAAAAJ:9yKSN-GCB0IC:
-    citations: 1
+    citations: 2
     title: Optimization of Inverted Double-Element Airfoil in Ground Effect using Improved HHO and Kriging Surrogate Model
     year: '2023'
   Uy2KwikAAAAJ:IjCSPb-OGe4C:
